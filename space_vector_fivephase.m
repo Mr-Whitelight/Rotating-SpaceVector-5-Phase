@@ -11,12 +11,23 @@ clc
 
 % SETUP ===================================================================
 % all physical quantities in S.I. units unless stated otherwise
+h=msgbox({'Author: CHAN Yun Sang, Ethan; CHAN Ho Kwan, Tony; SIU Pui Yin, Benji','','Department of Electrical Engineering, The Hong Kong Polytechnic University','','Demonstration program: Phasor and space vector'},"Copyright Information","modal");
+set(h, 'position', [100 440 300 100]);
+uiwait(h);
+prompt = {'Enter the AC line frequency (Default is 50Hz)','How many seconds do you want the simulation to run? (Default is 0.02 seconds)' };
+dlgtitle = 'AC Line frequency & Simulation Runtime';
+dims = [1 80];
+definput = {'50','0.02'};
+user_input = inputdlg(prompt,dlgtitle,dims,definput);
+%f = input(prompt);
 A = 10;                     % Amplitude of the AC Voltage
-f=50;                        % Freqeuency of the AC signal
-T=1/f;
+%f=50;                        % Freqeuency of the AC signal
+f_num=str2double(user_input(1,1));
+runtime_num=str2double(user_input(2,1));
+T=1/f_num;
 N = 100;                   % Number of frames for animation; smaller the value, the more triagular the sinewave will be
 dummy=2.5;
-t = linspace(0,0.02,100);                  % time increment
+t = linspace(0,runtime_num,100);                  % time increment
 v = A .* sin(2*pi*t/T);     % Mathmatic function of the AC Waveform
 V1 = A .* sin(2*pi*t/T+2*pi/5*1);  % phase shift forward 72 degree
 V2 = A .* sin(2*pi*t/T+2*pi/5*2);  % phase shift forward 144 degree
@@ -74,7 +85,7 @@ for c = 1 : N
    hold off
    set(gca,'FontSize',14);
    txtTime = ['Time: ' num2str(t(c)) 's'];
-   txtFrequency = ['Frequency: ' num2str(f) 'Hz'];
+   txtFrequency = ['Frequency: ' num2str(f_num) 'Hz'];
    txtPeriod = ['Period: ' num2str(T) 's'];
    text(26,28,txtTime,'FontSize',12);
    text(26,24,txtFrequency,'FontSize',12);
@@ -115,3 +126,5 @@ for c = 1 : N
    pause(0.001) % Delay 
 
 end
+h1=msgbox({'Simulation completed successfully! You may now close the window.'},"Simulation End","modal");
+set(h1, 'position', [500 500 250 70]);
