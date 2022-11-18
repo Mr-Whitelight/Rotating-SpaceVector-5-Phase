@@ -11,15 +11,12 @@ clc
 
 % SETUP ===================================================================
 % all physical quantities in S.I. units unless stated otherwise
-                             
-%% 
-%% 
-%% 
 A = 10;                     % Amplitude of the AC Voltage
-f=120;                        % Freqeuency of the AC signal
+f=50;                        % Freqeuency of the AC signal
 T=1/f;
-N = 400;                   % Number of frames for animation; smaller the value, the more triagular the sinewave will be
-t = linspace(0,0.03,400);              % time increment
+N = 100;                   % Number of frames for animation; smaller the value, the more triagular the sinewave will be
+dummy=2.5;
+t = linspace(0,0.02,100);                  % time increment
 v = A .* sin(2*pi*t/T);     % Mathmatic function of the AC Waveform
 V1 = A .* sin(2*pi*t/T+2*pi/5*1);  % phase shift forward 72 degree
 V2 = A .* sin(2*pi*t/T+2*pi/5*2);  % phase shift forward 144 degree
@@ -28,9 +25,6 @@ V4 = A .* sin(2*pi*t/T+2*pi/5*4);  % phase shift forward 288 degree
 Phase_Num= [0:4];
 real=cos(2*pi/5.*Phase_Num);
 imaginary=sin(2*pi/5.*Phase_Num);
-
-
-%vP = A .* cos(2*pi*t/T);   % Use this if you want a Cosine Waveform
 
 % GRAPHICS ================================================================
 %   Setup for plot window
@@ -43,13 +37,13 @@ set(gca,'FontSize',12);
 
 % circle
 p = linspace(0,2*pi,500);
-xc = 2.5*A .* cos(p);  % Horizontal Parameter of Circle_Voltage
-yc = 2.5*A .* sin(p);  % Vertical Parameter of Circle_Voltage
+xc = dummy*A .* cos(p);  % Horizontal Parameter of Circle_Voltage
+yc = dummy*A .* sin(p);  % Vertical Parameter of Circle_Voltage
 
 
 for c = 1 : N
    hold off
- %Circle Voltage
+   %Circle Voltage
    
    subplot(1,2,1);
 
@@ -68,11 +62,13 @@ for c = 1 : N
    plot(xc,yc,'b','lineWidth',1);  % Perimeter of circle
    title('Space Vectors in  Complex Plane')
    xlabel('Unit Length');
+   txtInfo = {'Group Members: ','','1. CHAN Yun Sang','','2. CHAN Ho Kwan','','3. SIU Pui Yin'};
+   text(-43,20,txtInfo,'FontSize',12);
 
-   xP = [0 0]; yP = [-A*2.5 A*2.5]; % Background vertical coordinate axis of circle
+   xP = [0 0]; yP = [-A*dummy A*dummy]; % Background vertical coordinate axis of circle
    plot(xP,yP,'k','LineWidth',1);
 
-   xP = [-A*2.5 A*2.5]; yP = [0 0];  % Background horizontal coordinate axis of circle
+   xP = [-A*dummy A*dummy]; yP = [0 0];  % Background horizontal coordinate axis of circle
    plot(xP,yP,'k','LineWidth',1);
    
    hold off
@@ -100,40 +96,21 @@ for c = 1 : N
    xP = t(1:c); yP = v(1:c); % Horizontal component of sin wave (blue trcking line)
    plot(xP,yP,'b','LineWidth',2); 
 
-   yP = V1(1:c); % Horizontal component of sin wave (yellow trcking line)
-   plot(xP,yP,'y','LineWidth',2); 
+   yP2 = V1(1:c); % Horizontal component of sin wave (yellow trcking line)
+   plot(xP,yP2,'y','LineWidth',2); 
 
-   yP = V2(1:c); % Horizontal component of sin wave (green trcking line)
-   plot(xP,yP,'g','LineWidth',2); 
+   yP3 = V2(1:c); % Horizontal component of sin wave (green trcking line)
+   plot(xP,yP3,'g','LineWidth',2); 
 
-   yP = V3(1:c); % Horizontal component of sin wave (Red trcking line)
-   plot(xP,yP,'r','LineWidth',2); 
+   yP4 = V3(1:c); % Horizontal component of sin wave (Red trcking line)
+   plot(xP,yP4,'r','LineWidth',2); 
 
-   yP = V4(1:c); % Horizontal component of sin wave (pink trcking line)
-   plot(xP,yP,'m','LineWidth',2); 
+   yP5 = V4(1:c); % Horizontal component of sin wave (pink trcking line)
+   plot(xP,yP5,'m','LineWidth',2); 
 
-
-   %{
-   xP = t(1:c); yP = v(1:c); % Horizontal component of sin wave (blue trcking line)
-   plot(xP,yP,'b','LineWidth',2); 
-
-   xP = t(1:c); yP = V1(1:c); % Horizontal component of sin wave (yellow trcking line)
-   plot(xP,yP,'y','LineWidth',2); 
-
-   xP = t(1:c); yP = V2(1:c); % Horizontal component of sin wave (green trcking line)
-   plot(xP,yP,'g','LineWidth',2); 
-
-   xP = t(1:c); yP = V3(1:c); % Horizontal component of sin wave (Red trcking line)
-   plot(xP,yP,'r','LineWidth',2); 
-
-   xP = t(1:c); yP = V4(1:c); % Horizontal component of sin wave (pink trcking line)
-   plot(xP,yP,'m','LineWidth',2); 
-   %}
 
    hold off
    set(gca,'FontSize',12);
-   legend('','Phase A','Phase B','Phase C','Phase D','Phase E');
-
    axis on
    pause(0.001) % Delay 
 
