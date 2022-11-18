@@ -71,9 +71,6 @@ for c = 1 : N
    plot(xc,yc,'b','lineWidth',1);  % Perimeter of circle
    title('Space Vectors in  Complex Plane')
    xlabel('Unit Length');
-   txtInfo = {'Group Members: ','','1. CHAN Yun Sang','','2. CHAN Ho Kwan','','3. SIU Pui Yin'};
-   text(-43,20,txtInfo,'FontSize',12);
-
    xP = [0 0]; yP = [-A*dummy A*dummy]; % Background vertical coordinate axis of circle
    plot(xP,yP,'k','LineWidth',1);
 
