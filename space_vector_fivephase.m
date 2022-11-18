@@ -12,14 +12,12 @@ clc
 % SETUP ===================================================================
 % all physical quantities in S.I. units unless stated otherwise
 h=msgbox({'Author: CHAN Yun Sang, Ethan; CHAN Ho Kwan, Tony; SIU Pui Yin, Benji','','Department of Electrical Engineering, The Hong Kong Polytechnic University','','Demonstration program: Phasor and space vector'},"Copyright Information","modal");
-set(h, 'position', [100 440 300 100]);
 uiwait(h);
 prompt = {'Enter the AC line frequency (Default is 50Hz)','How many seconds do you want the simulation to run? (Default is 0.02 seconds)' };
 dlgtitle = 'AC Line frequency & Simulation Runtime';
 dims = [1 80];
 definput = {'50','0.02'};
 user_input = inputdlg(prompt,dlgtitle,dims,definput);
-%f = input(prompt);
 A = 10;                     % Amplitude of the AC Voltage
 %f=50;                        % Freqeuency of the AC signal
 f_num=str2double(user_input(1,1));
@@ -127,4 +125,3 @@ for c = 1 : N
 
 end
 h1=msgbox({'Simulation completed successfully! You may now close the window.'},"Simulation End","modal");
-set(h1, 'position', [500 500 250 70]);
